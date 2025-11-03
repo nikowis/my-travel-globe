@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import GlobeComponent from '@/components/Globe';
-import VisitedList from '@/components/VisitedList';
 
 const Index = () => {
   const [visitedCountries, setVisitedCountries] = useState<string[]>([]);
@@ -31,13 +30,9 @@ const Index = () => {
     });
   };
 
-  const handleRemoveCountry = (country: string) => {
-    setVisitedCountries(prev => prev.filter(c => c !== country));
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-6">
+      <div className="w-full px-4 py-6">
         <header className="mb-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2">
             World Travel Tracker
@@ -47,27 +42,10 @@ const Index = () => {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-6 h-[calc(100vh-200px)]">
-          <div className="rounded-xl overflow-hidden border border-border/50 bg-card/50 backdrop-blur-sm">
-            <GlobeComponent
-              visitedCountries={visitedCountries}
-              onCountryClick={handleCountryClick}
-            />
-          </div>
-          
-          <div className="hidden lg:block">
-            <VisitedList
-              visitedCountries={visitedCountries}
-              onRemoveCountry={handleRemoveCountry}
-            />
-          </div>
-        </div>
-
-        {/* Mobile visited list */}
-        <div className="lg:hidden mt-6">
-          <VisitedList
+        <div className="w-full h-[calc(100vh-200px)] rounded-xl overflow-hidden border border-border/50 bg-card/50 backdrop-blur-sm">
+          <GlobeComponent
             visitedCountries={visitedCountries}
-            onRemoveCountry={handleRemoveCountry}
+            onCountryClick={handleCountryClick}
           />
         </div>
       </div>

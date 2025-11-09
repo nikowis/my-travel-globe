@@ -35,20 +35,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <div className="flex-1 w-full flex items-center justify-center p-4 relative">
-        <Card className="absolute top-8 left-8 z-10 px-6 py-4 bg-card/90 backdrop-blur-sm border-border/50">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-foreground">
-              {visitedCountries.length}
-              <span className="text-muted-foreground">/{totalCountries}</span>
-              <span className="text-lg ml-2 text-muted-foreground">
-                ({totalCountries > 0 ? ((visitedCountries.length / totalCountries) * 100).toFixed(1) : 0}%)
-              </span>
-            </div>
-            <div className="text-sm text-muted-foreground mt-1">
-              Countries Visited
-            </div>
+        <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-background/80 backdrop-blur-sm rounded-lg border border-border/30">
+          <div className="text-sm font-medium text-foreground">
+            {visitedCountries.length}/{totalCountries} ({totalCountries > 0 ? ((visitedCountries.length / totalCountries) * 100).toFixed(1) : 0}%)
           </div>
-        </Card>
+        </div>
         <div className="w-full h-full rounded-xl overflow-hidden border border-border/50 bg-card/50 backdrop-blur-sm">
           <GlobeComponent 
             visitedCountries={visitedCountries} 

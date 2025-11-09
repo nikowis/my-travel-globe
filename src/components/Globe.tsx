@@ -23,7 +23,7 @@ const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProp
   useEffect(() => {
     if (globeEl.current) {
       // Auto-rotate
-      globeEl.current.controls().autoRotate = true;
+      globeEl.current.controls().autoRotate = false;
       globeEl.current.controls().autoRotateSpeed = 0.3;
       
       // Track camera altitude for showing labels when zoomed in

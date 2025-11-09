@@ -76,8 +76,10 @@ const GlobeComponent = ({ visitedCountries, onCountryClick, onCountriesLoaded }:
   return (
     <Globe
       ref={globeEl}
-      showGlobe={false}
-      backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+      showGlobe={true}
+      showAtmosphere={true}
+      globeImageUrl=""
+      backgroundColor="rgba(0,0,0,0)"
       polygonsData={countries.features}
       polygonAltitude={(d: any) => (hoverD === d ? 0.01 : 0.006)}
       polygonCapColor={getPolygonColor}

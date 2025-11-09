@@ -83,7 +83,7 @@ const GlobeComponent = ({ visitedCountries, onCountryClick, onCountriesLoaded }:
       polygonsData={countries.features}
       polygonAltitude={(d: any) => (hoverD === d ? 0.01 : 0.006)}
       polygonCapColor={getPolygonColor}
-      polygonSideColor={() => 'rgba(0, 0, 0, 0.15)'}
+      polygonSideColor={() => 'rgba(0, 0, 0, 0.8)'}
       polygonStrokeColor={() => '#000'}
       onPolygonHover={setHoverD}
       onPolygonClick={handlePolygonClick}

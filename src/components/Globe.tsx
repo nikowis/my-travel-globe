@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Globe from 'react-globe.gl';
 import { toast } from 'sonner';
+import * as THREE from 'three';
 
 interface GlobeComponentProps {
   visitedCountries: string[];
@@ -31,6 +32,15 @@ const GlobeComponent = ({ visitedCountries, onCountryClick, onCountriesLoaded }:
       // Auto-rotate
       globeEl.current.controls().autoRotate = false;
       globeEl.current.controls().autoRotateSpeed = 0.3;
+      
+      // Set globe material to light gray
+      const globe = globeEl.current.scene().children.find((obj: any) => obj.type === 'Mesh');
+      if (globe) {
+        globe.material = new THREE.MeshPhongMaterial({
+          color: '#d1d5db',
+          shininess: 15,
+        });
+      }
       
       // Track camera altitude for showing labels when zoomed in
       const controls = globeEl.current.controls();
@@ -76,8 +86,9 @@ const GlobeComponent = ({ visitedCountries, onCountryClick, onCountriesLoaded }:
   return (
     <Globe
       ref={globeEl}
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-      backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+      showGlobe={true}
+      showAtmosphere={true}
+      backgroundColor="rgba(0,0,0,0)"
       polygonsData={countries.features}
       polygonAltitude={(d: any) => (hoverD === d ? 0.01 : 0.006)}
       polygonCapColor={getPolygonColor}

@@ -89,15 +89,15 @@ const GlobeComponent = ({ visitedCountries, onCountryClick, onCountriesLoaded }:
       onPolygonClick={handlePolygonClick}
       atmosphereColor="#3b82f6"
       atmosphereAltitude={0.15}
-      labelsData={altitude < 1.5 ? labelData : []}
+      labelsData={altitude < 2.5 ? labelData : []}
       labelLat={(d: any) => d.lat}
       labelLng={(d: any) => d.lng}
       labelText={(d: any) => d.name}
-      labelSize={0.8}
+      labelSize={1.2}
       labelDotRadius={0}
       labelColor={() => 'rgba(255, 255, 255, 0.95)'}
       labelResolution={3}
-      labelAltitude={0.01}
+      labelAltitude={0.015}
     />
   );
 };

@@ -47,7 +47,7 @@ const GlobeComponent = ({ visitedCountries, onCountryClick, onCountriesLoaded }:
     if (visitedCountries.includes(countryName)) {
       return 'rgba(59, 130, 246, 0.8)'; // Bright blue for visited
     }
-    return hoverD === d ? 'rgba(100, 116, 139, 0.6)' : 'rgba(71, 85, 105, 0.4)';
+    return hoverD === d ? 'rgba(180, 180, 180, 0.7)' : 'rgba(200, 200, 200, 0.6)';
   };
 
   const handlePolygonClick = (d: any) => {
@@ -83,8 +83,8 @@ const GlobeComponent = ({ visitedCountries, onCountryClick, onCountriesLoaded }:
       polygonsData={countries.features}
       polygonAltitude={(d: any) => (hoverD === d ? 0.01 : 0.006)}
       polygonCapColor={getPolygonColor}
-      polygonSideColor={() => 'rgba(0, 0, 0, 0.1)'}
-      polygonStrokeColor={() => '#111'}
+      polygonSideColor={() => 'rgba(0, 0, 0, 0.15)'}
+      polygonStrokeColor={() => '#000'}
       onPolygonHover={setHoverD}
       onPolygonClick={handlePolygonClick}
       atmosphereColor="#3b82f6"

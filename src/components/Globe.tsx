@@ -5,9 +5,10 @@ import { toast } from 'sonner';
 interface GlobeComponentProps {
   visitedCountries: string[];
   onCountryClick: (country: string) => void;
+  onCountriesLoaded?: (total: number) => void;
 }
 
-const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProps) => {
+const GlobeComponent = ({ visitedCountries, onCountryClick, onCountriesLoaded }: GlobeComponentProps) => {
   const globeEl = useRef<any>();
   const [countries, setCountries] = useState({ features: [] });
   const [hoverD, setHoverD] = useState<any>(null);
@@ -17,8 +18,13 @@ const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProp
     // Load country data
     fetch('https://raw.githubusercontent.com/vasturiano/react-globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
       .then(res => res.json())
-      .then(setCountries);
-  }, []);
+      .then(data => {
+        setCountries(data);
+        if (onCountriesLoaded) {
+          onCountriesLoaded(data.features.length);
+        }
+      });
+  }, [onCountriesLoaded]);
 
   useEffect(() => {
     if (globeEl.current) {

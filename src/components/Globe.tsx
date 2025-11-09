@@ -11,6 +11,7 @@ const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProp
   const globeEl = useRef<any>();
   const [countries, setCountries] = useState({ features: [] });
   const [hoverD, setHoverD] = useState<any>(null);
+  const [altitude, setAltitude] = useState(2.5);
 
   useEffect(() => {
     // Load country data
@@ -24,6 +25,14 @@ const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProp
       // Auto-rotate
       globeEl.current.controls().autoRotate = true;
       globeEl.current.controls().autoRotateSpeed = 0.3;
+      
+      // Track camera altitude for showing labels when zoomed in
+      const controls = globeEl.current.controls();
+      const handleChange = () => {
+        setAltitude(globeEl.current.camera().position.length());
+      };
+      controls.addEventListener('change', handleChange);
+      return () => controls.removeEventListener('change', handleChange);
     }
   }, []);
 
@@ -45,6 +54,18 @@ const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProp
       );
     }
   };
+
+  // Calculate label data from countries
+  const labelData = countries.features.map((d: any) => {
+    const countryName = d.properties.ADMIN || d.properties.NAME;
+    // Calculate center point from bbox
+    const bbox = d.bbox || [0, 0, 0, 0];
+    return {
+      lat: (bbox[1] + bbox[3]) / 2,
+      lng: (bbox[0] + bbox[2]) / 2,
+      name: countryName,
+    };
+  });
 
   return (
     <Globe
@@ -73,6 +94,13 @@ const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProp
       onPolygonClick={handlePolygonClick}
       atmosphereColor="#3b82f6"
       atmosphereAltitude={0.15}
+      labelsData={altitude < 1.5 ? labelData : []}
+      labelLat={(d: any) => d.lat}
+      labelLng={(d: any) => d.lng}
+      labelText={(d: any) => d.name}
+      labelSize={0.5}
+      labelColor={() => 'rgba(255, 255, 255, 0.9)'}
+      labelResolution={2}
     />
   );
 };

@@ -77,19 +77,6 @@ const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProp
       polygonCapColor={getPolygonColor}
       polygonSideColor={() => 'rgba(0, 0, 0, 0.1)'}
       polygonStrokeColor={() => '#111'}
-      polygonLabel={({ properties }: any) => `
-        <div style="
-          background: rgba(0, 0, 0, 0.9);
-          padding: 8px 12px;
-          border-radius: 6px;
-          color: white;
-          font-family: system-ui, -apple-system, sans-serif;
-          font-size: 14px;
-          border: 1px solid rgba(59, 130, 246, 0.5);
-        ">
-          <strong>${properties.ADMIN || properties.NAME}</strong>
-        </div>
-      `}
       onPolygonHover={setHoverD}
       onPolygonClick={handlePolygonClick}
       atmosphereColor="#3b82f6"
@@ -98,9 +85,11 @@ const GlobeComponent = ({ visitedCountries, onCountryClick }: GlobeComponentProp
       labelLat={(d: any) => d.lat}
       labelLng={(d: any) => d.lng}
       labelText={(d: any) => d.name}
-      labelSize={0.5}
-      labelColor={() => 'rgba(255, 255, 255, 0.9)'}
-      labelResolution={2}
+      labelSize={0.8}
+      labelDotRadius={0}
+      labelColor={() => 'rgba(255, 255, 255, 0.95)'}
+      labelResolution={3}
+      labelAltitude={0.01}
     />
   );
 };

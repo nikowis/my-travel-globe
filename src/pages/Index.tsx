@@ -40,6 +40,9 @@ const Index = () => {
             <div className="text-3xl font-bold text-foreground">
               {visitedCountries.length}
               <span className="text-muted-foreground">/{totalCountries}</span>
+              <span className="text-lg ml-2 text-muted-foreground">
+                ({totalCountries > 0 ? ((visitedCountries.length / totalCountries) * 100).toFixed(1) : 0}%)
+              </span>
             </div>
             <div className="text-sm text-muted-foreground mt-1">
               Countries Visited
